@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title></title>
+  <style>
+  body{
+    overflow: auto;
+    margin:0;
+    padding:25px;
+    font-family: consolas, arial;
+  }
+  h1 {
+    font-size: 18px;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  ul {
+    list-style-type: square;
+  }
+  </style>
+</head>
+<body>
+    <h1 id="changelog">changelog</h1>
+    <h2>Customize > vertbar</h2>
+    <ul>
+      <li>same as eraserbar but integrated into discord window instead</li>
+    </ul>  
+    <h2>Layout > hide discord layout</h2>
+    <ul>
+      <li>removes desktop space reserved for discord for more screen real estate for search windows</li>
+    </ul>
+    <h2>Triggers</h2>
+    <ul>
+      <li>added new triggers</li>
+    </ul>
+  
+
+  
+  <h1 class="old">changelog 5.97</h1>
+    <h2>Customize > eraserbar</h2>
+    <ul>
+      <li>opens a window above search windows</li>
+      <li>updates from erasers in chat</li>
+      <li>updates 3-levels of green from positive answers in chat from light to dark based on the number of confident answers.</li>
+    </ul>
+    <h2>Search Type > {multi-role} + {input}:</h2>
+    <ul>
+      <li>choose any/multiple roles</li>
+      <li>will open 1 window with the first selected role - waits for manual input</li>
+      <li>searches for all selected roles with inputed search</li>
+    </ul>
+</body>
+</html>
+<script>
+  var urlParams = new URLSearchParams(window.location.search);
+  let v = urlParams.get('v');
+  document.getElementById("changelog").innerText = `changelog ${v}`;
+</script>
