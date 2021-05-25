@@ -1,7 +1,123 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>eraserbar</title>
+  <style>
+  body{
+    overflow:hidden;
+    margin:0;
+    padding:0;
+    font-family: consolas, arial;
+  }
+  .divider{
+    flex-grow: 1;
+    height: 2000px;
+    background-color: black;
+  }
+  .notContainer, .yesContainer, #error{
+    position: absolute;
+    top:0;
+    height: 2000px;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content: space-between;
+  }
+  #error{
+    height: unset;
+    bottom:0;
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: bold;
+    z-index: 15;
+  }
+  .notContainer{
+    z-index: 10;
+  }
+  .nots, .yes {
+    width: 34%;
+    height: 2000px;
+    display:block;
+  }
+  .n1, .y1 {
+    width: 33.25%;
+  }    
+  .n2, .y2 {
+    width: 33%;
+  }
+  .n3, .y3 {
+    width: 33.4%;
+  }
+  .red {
+    color: red;
+    font-size: 14px;
+  }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <div class="notContainer">
+    <div class="nots n1"></div>
+    <div class='divider'></div>
+    <div class="nots n2"></div>
+    <div class='divider'></div>
+    <div class="nots n3"></div>
+  </div>
+  <div class="yesContainer">
+    <div class="yes y1"></div>
+    <div class='divider'></div>
+    <div class="yes y2"></div>
+    <div class='divider'></div>
+    <div class="yes y3"></div>
+  </div>
+  <div id="error"><span class='red'>&#9888;</span>&nbsp;MUST BE IN &#72;&#81;&#45;&#84;&#82;&#73;&#86;&#73;&#65; FOR &#69;&#82;&#65;&#83;&#69;&#82;&#66;&#65;&#82; TO FUNCTION PROPERLY&nbsp;<span class='red'>&#9888;</span></div>
 </body>
 </html>
+<script>
+  var urlParams = new URLSearchParams(window.location.search);
+  let not = urlParams.get('not');
+  let yes = urlParams.get('yes');
+  let path = urlParams.get('path');
+  let v = urlParams.get('v');
+  if(v) {
+    document.title = `eraserbar ${v}`;
+  }
+  if(path == "false") {
+    document.getElementById("error").style.display = "flex";
+  }
+  if(not) {
+    not = not.split("");
+    not.map(p => {
+      var i = document.getElementsByClassName("n"+p)
+      if(i && i[0]){
+        i[0].style.backgroundColor = "red";
+      }
+    });
+  }
+  if(yes) {
+    yes = yes.split("");
+    for (i = 1; i <= 3; i++) {
+      console.log(i)
+      let opt = yes.filter(p => p == i);
+      let el = document.getElementsByClassName(`y${i}`)
+
+      if(opt.length == 1) {
+        el[0].style.backgroundColor = "#008000";
+        el[0].style.opacity = 0.33;
+      }
+      if(opt.length == 2) {
+        el[0].style.backgroundColor = "#008000";
+        el[0].style.opacity = 0.66;
+      }
+      if(opt.length >= 3) {
+        el[0].style.backgroundColor = "#008000";
+        el[0].style.opacity = 1.0;
+      }
+    }
+
+  }  
+</script>
+
