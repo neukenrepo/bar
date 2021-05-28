@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>whataburger 2.9</title>
+  <title>whataburger 3.0</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
@@ -1094,6 +1094,210 @@ function execute() {
         localStorage.setItem("display",JSON.stringify(t));
         doc();
     }
+
+function supdoc() {
+        let t = $("#json").val()
+        t = JSON.parse(t);
+        let q = t.data.result.q;
+        let data = ''
+        var params = {
+            spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
+        };
+        let payload = [];
+        let dropdown = [];
+        if(q) {
+            var params = {
+                spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
+                ranges: [],  // TODO: Update placeholder value.
+                includeGridData: true,  // TODO: Update placeholder value.
+            };
+
+            var request = gapi.client.sheets.spreadsheets.get(params);
+            request.then(function(response) {
+                //console.log(response.result);
+                q.map((ques, i) => {
+                    let defprops = {
+                        "wrapStrategy": "WRAP",
+                        "horizontalAlignment": "LEFT",
+                        "verticalAlignment": "TOP"
+                    }
+
+                    let row = {
+                        "values": [
+                            {
+                                "userEnteredValue": {
+                                    "stringValue": `${q[i].q_c}`,
+                                },
+                                "userEnteredFormat": {
+                                    ...defprops,
+                                    "padding": {
+                                        "bottom": 2
+                                    }
+                                }
+                            },
+                        ]
+                    }
+                    if(q[i].a) {
+                        q[i].a.map((a, y) => {
+                            let color = {
+                                "red": 1,
+                                "green": 1,
+                                "blue": 1,
+                                "alpha": 1,
+                            }
+                            try {
+                                color = response.result.sheets[0].data[0].rowData[i].values[Number(y+1)].userEnteredFormat.backgroundColor;
+                            } catch(e){}
+                            row.values.push({
+                                "userEnteredValue": {
+                                    "stringValue": `${q[i].a[y].a_c}`,
+                                },
+                                "userEnteredFormat": {
+                                    ...defprops,
+                                    "backgroundColor": color,
+                                }
+                            });
+                        });
+                        if(i>0) {
+                            dropdown.push(
+                                {
+                                    "setDataValidation": {
+                                        "range": {
+                                            "sheetId": 0,
+                                            "startRowIndex": i,
+                                            "endRowIndex": i+1,
+                                            "startColumnIndex": 4,
+                                            "endColumnIndex": 5
+                                        },
+                                        "rule": {
+                                            "condition": {
+                                                "type": 'ONE_OF_LIST',
+                                                "values": [
+                                                    {
+                                                        "userEnteredValue": `1) ${q[i].a[0].a_c}`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `2) ${q[i].a[1].a_c}`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `3) ${q[i].a[2].a_c}`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `not sure ???`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `maybe 1) ${q[i].a[0].a_c} ?`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `maybe 2) ${q[i].a[1].a_c} ?`,
+                                                    },
+                                                    {
+                                                        "userEnteredValue": `maybe 3) ${q[i].a[2].a_c} ?`,
+                                                    },                                                  
+                                                ],
+                                            },
+                                            "showCustomUi": true,
+                                            "strict": false
+                                        }
+                                    }
+                                }
+                            );
+                        }
+                        if(i==0) {
+                            row.values.push({
+                                "userEnteredValue": {
+                                    "stringValue": `ANSWERS COLUMN`,
+                                },
+                                "userEnteredFormat": {
+                                    ...defprops,
+                                    "horizontalAlignment": "CENTER",
+                                    "verticalAlignment": "MIDDLE",
+                                    "textFormat": {
+                                        "bold": true
+                                    },
+                                    "backgroundColor": {
+                                        "red": 1,
+                                        "green": 1,
+                                        "blue": 0,
+                                        "alpha": 1,
+                                    },
+                                }
+                            });
+                            row.values.push({
+                                "userEnteredValue": {
+                                    "stringValue": `NOTES`,
+                                },
+                                "userEnteredFormat": {
+                                    ...defprops,
+                                    "horizontalAlignment": "CENTER",
+                                    "verticalAlignment": "MIDDLE",
+                                    "textFormat": {
+                                        "bold": true
+                                    },
+                                    "backgroundColor": {
+                                        "red": 1,
+                                        "green": 1,
+                                        "blue": 0,
+                                        "alpha": 1,
+                                    },
+                                }
+                            });
+                        } else {
+                            row.values.push({
+                                "userEnteredValue": {
+                                    "stringValue": `Q${i+1} ANSWER`,
+                                },
+                                "userEnteredFormat": {
+                                    ...defprops,
+                                    "horizontalAlignment": "LEFT",
+                                    "verticalAlignment": "MIDDLE",
+                                    "textFormat": {
+                                        "bold": true
+                                    },
+                                }
+                            });
+                        }
+                    }
+
+                    payload.push(row)
+                });
+
+                payload.push(instructions());
+
+                let spreadsheet_id = '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE'
+                var body = {
+                    "requests": [
+                        {
+                            "updateCells": {
+                                "range": {
+                                    "sheetId": 0,
+                                    "startRowIndex": 0,
+                                    "startColumnIndex": 0
+                                },
+                                "rows": payload,
+                                "fields": "*"
+                            }
+                        },
+                        ...dropdown
+                    ]
+                }
+
+                var x = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: spreadsheet_id}, body=body);
+                x.then(function(response) {
+                    //console.log(response);
+                    $("#error").html("");
+                }, function(reason) {
+                    console.error('error: ' + reason.result.error.message);
+                    $("#error").html("login first!");
+                });
+
+
+            }, function(reason) {
+                console.error('error: ' + reason.result.error.message);
+                $("#error").html("login first!");
+            });
+        }
+    }
   
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
@@ -1118,7 +1322,12 @@ function execute() {
   </div>
   <div style="margin-top:10px;">
     <button id="doc" onclick="doc()">doc</button>
+  </div>
+  
+  <div style="margin-top:10px;">
+    <button id="doc" onclick="supdoc()">supdoc</button>
   </div>  
+  
   <div style="margin-top:50px;">
     <button id="reset" onclick="reset()">clear sheet</button>
     <span id='error' style="margin-left:10px; color: red; font-weight:bold"></span>
