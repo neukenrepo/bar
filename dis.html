@@ -356,7 +356,7 @@ $().ready(function() {
     function makeApiCall() {
       var params = {
         // The spreadsheet to request.
-        spreadsheetId: '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE',  // TODO: Update placeholder value.
+        spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',  // TODO: Update placeholder value.
 
         // The ranges to retrieve from the spreadsheet.
         ranges: [],  // TODO: Update placeholder value.
@@ -498,7 +498,7 @@ function CellData(cb) {
         let payload = [];
         if(q){
             var params = {
-                spreadsheetId: '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE',
+                spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
                 ranges: [],  // TODO: Update placeholder value.
                 includeGridData: true,  // TODO: Update placeholder value.
             };
@@ -570,13 +570,13 @@ function execute() {
         let q = t.data.result.q;
         let data = ''
         var params = {
-            spreadsheetId: '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE',
+            spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
         };
         let payload = [];
         let dropdown = [];
         if(q) {
             var params = {
-                spreadsheetId: '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE',
+                spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
                 ranges: [],  // TODO: Update placeholder value.
                 includeGridData: true,  // TODO: Update placeholder value.
             };
@@ -733,7 +733,7 @@ function execute() {
 
                 payload.push(instructions());
 
-                let spreadsheet_id = '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE'
+                let spreadsheet_id = '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4'
                 var body = {
                     "requests": [
                         {
@@ -843,7 +843,7 @@ function execute() {
             ]
         }
 
-        var x = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: `1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE`}, body=body);
+        var x = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: `1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4`}, body=body);
         x.then(function(response) {
             //console.log(response);
             $("#error").html("");
@@ -986,7 +986,7 @@ function execute() {
                 ]
             }
 
-            var x = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: `1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE`}, body=body);
+            var x = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: `1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4`}, body=body);
             x.then(function(response) {
                 //console.log(response);
             }, function(reason) {
