@@ -1096,18 +1096,19 @@ function execute() {
     }
 
 function supdoc() {
+        let id = '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4';
         let t = $("#json").val()
         t = JSON.parse(t);
         let q = t.data.result.q;
         let data = ''
         var params = {
-            spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
+            spreadsheetId: id,
         };
         let payload = [];
         let dropdown = [];
         if(q) {
             var params = {
-                spreadsheetId: '1GT_CzP6y9J1IJaQE9UdhUdb5EGRJW_Gd7jSrQXflOF4',
+                spreadsheetId: id,
                 ranges: [],  // TODO: Update placeholder value.
                 includeGridData: true,  // TODO: Update placeholder value.
             };
@@ -1264,7 +1265,7 @@ function supdoc() {
 
                 payload.push(instructions());
 
-                let spreadsheet_id = '1SuQffeygX9L8cyLp3ZfgYWjfJs8IVzHLrCXCoifO5ZE'
+                let spreadsheet_id = id
                 var body = {
                     "requests": [
                         {
