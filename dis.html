@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>whataburger 3.1</title>
+  <title>whataburger 3.2</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
@@ -1159,7 +1159,7 @@ function supdoc() {
                                 }
                             });
                         });
-                        if(i>0) {
+                        if(i>-1) {
                             dropdown.push(
                                 {
                                     "setDataValidation": {
@@ -1204,7 +1204,7 @@ function supdoc() {
                                 }
                             );
                         }
-                        if(i==0) {
+                        if(i==-1) {
                             row.values.push({
                                 "userEnteredValue": {
                                     "stringValue": `ANSWERS COLUMN`,
