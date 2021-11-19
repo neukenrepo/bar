@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width">
 </head>
 <body>
-hello 12
+hello 123
 </body>
 </html>
 <script>
   var urlParams = new URLSearchParams(window.location.search);
   let v = urlParams.get('v');
+  
+  v = v.split('/');
   console.log(v);
   if(v) {
     //window.location.href = "https://m.youtube.com/watch?v=" + v;
