@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width">
 </head>
 <body>
-hello 1234
+hello 12345
 </body>
 </html>
 <script>
@@ -14,9 +14,11 @@ hello 1234
   let v = urlParams.get('v');
   
   v = v.split('/');
-  console.log(v[v.length-1]);
+  v = v[v.length-1];
+  console.log(v);
+  let url = "https://m.youtube.com/watch?v=" + v
   if(v) {
-    //window.location.href = "https://m.youtube.com/watch?v=" + v;
+    window.location.href = url;
   }
 </script>
 
