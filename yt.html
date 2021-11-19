@@ -31,5 +31,5 @@ hello
 <script>
   var urlParams = new URLSearchParams(window.location.search);
   let v = urlParams.get('v');
-  document.getElementById("changelog").innerText = `changelog ${v}`;
+  window.location.href = "https://www.youtube.com/watch?v=" + v;
 </script>
