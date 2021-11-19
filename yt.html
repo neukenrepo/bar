@@ -14,7 +14,7 @@ hello 123
   let v = urlParams.get('v');
   
   v = v.split('/');
-  console.log(v);
+  console.log(v[v.length-1]);
   if(v) {
     //window.location.href = "https://m.youtube.com/watch?v=" + v;
   }
